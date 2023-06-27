@@ -27,6 +27,8 @@ namespace UchetProsmotrennichFilmov.Pages
     public partial class Glavnaya : Window
     {
         private int PagesCount;
+        private int PagesCount1;
+
         private int NumberOfPage = 0;
         private int maxItemShow = 5;
         List<Films> currentTasks = AppDB.db.Films.ToList();
@@ -397,6 +399,15 @@ namespace UchetProsmotrennichFilmov.Pages
                 currentfilm.Add(AppDB.db.Films.ToList().Where(c => c.IdFilm == item.FilmId && item.UserId == AppDB.CurrentUser.IdUser).First());
             LBMyTasks.ItemsSource = currentfilm;
             PagesCount = Convert.ToInt16(currentfilm.Count);
+        }
+
+        private void PROS_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            List<Films> currentfilm = new List<Films>();
+            foreach (var item in AppDB.db.Prosmotreno.ToList().Where(c => c.UserId == AppDB.CurrentUser.IdUser).ToList())
+                currentfilm.Add(AppDB.db.Films.ToList().Where(c => c.IdFilm == item.FilmId && item.UserId == AppDB.CurrentUser.IdUser).First());
+            LBMyTasks.ItemsSource = currentfilm;
+            PagesCount1 = Convert.ToInt16(currentfilm.Count);
         }
 
         //private void BtnAddRezh_Click(object sender, RoutedEventArgs e)
