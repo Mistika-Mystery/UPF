@@ -342,13 +342,24 @@
                     </LinearGradientBrush>
                 </TabItem.Background>
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" MouseDown="StackPanel_MouseDown">
                         <Image Source="/Image/izb.png" VerticalAlignment="Center" Width="15"/>
                         <TextBlock Margin="3">Избранное</TextBlock>
                     </StackPanel>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <Label/>
+                    <ListBox  d:ItemsSource="{d:SampleData ItemCount=PagesCount}" Name="LBMyTasks" BorderThickness="3px" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <ListBox.ItemTemplate>
+
+                            <DataTemplate>
+                                <Grid >
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding NameFilm}" FontSize="14pt"></TextBlock>
+                                </Grid>
+                            </DataTemplate>
+
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    
                 </TabItem.Content>
             </TabItem>
             <TabItem>

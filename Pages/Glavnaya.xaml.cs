@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -386,6 +388,15 @@ namespace UchetProsmotrennichFilmov.Pages
                 
                 
             }
+        }
+
+        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            List<Films> currentfilm = new List<Films>();
+            foreach (var item in AppDB.db.Prosmotreno.ToList().Where(c => c.UserId == AppDB.CurrentUser.IdUser).ToList())
+                currentfilm.Add(AppDB.db.Films.ToList().Where(c => c.IdFilm == item.FilmId && item.UserId == AppDB.CurrentUser.IdUser).First());
+            LBMyTasks.ItemsSource = currentfilm;
+            PagesCount = Convert.ToInt16(currentfilm.Count);
         }
 
         //private void BtnAddRezh_Click(object sender, RoutedEventArgs e)
